@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "rel8-Admin",
+    "slug": "rel8-Admin",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
