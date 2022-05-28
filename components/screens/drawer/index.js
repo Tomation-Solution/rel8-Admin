@@ -55,7 +55,7 @@ export default function CustomDrawerList({navigation}) {
 
     const drawerData2 =[
         
-        {id:8, label:'Support', to:'support', icon:<MaterialIcon name="headset-mic" size={22} color={'grey'}
+        {id:8, label:'Support', to:'supports', icon:<MaterialIcon name="headset-mic" size={22} color={'grey'}
      /> },
      {id:7, label:'Settings', to:'settings', icon:<MaterialIcon name="settings" size={22} color={'grey'}
      /> },
@@ -66,7 +66,7 @@ export default function CustomDrawerList({navigation}) {
         {id:10, label:'Archive', to:'archive'},
         {id:11, label:'Gallery', to:'gallery'},
         {id:11, label:'Publications', to:'publications'},
-        {id:11, label:'Minutes', to:'minutes'},
+        {id:11, label:'Minutes', to:'minute'},
        
     ]
 

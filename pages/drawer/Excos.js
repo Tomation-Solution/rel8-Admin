@@ -13,9 +13,6 @@ import { MemberCard } from '../../components/card/MemberCard'
 import IconButton from '../../components/button/IconButton'
 import EditMember from '../../components/modal/Member/editMember'
 import DeleteMember from '../../components/modal/Member/deleteMember'
-import RoundedButton from '../../components/button/RoundedButton'
-import AddMember from '../../components/modal/Member/addMember'
-import BatchUpload from '../../components/modal/Member/batchUpload'
 
 
 const data =[
@@ -28,12 +25,10 @@ const data =[
     {id:'7',name:'Chigozie Nwacukwu', department:'Accounting', Year:'2009'},
 ]
 
-export default function Member() {
+export default function Excos() {
 
     const [edit, setEdit] = useState(false)
     const [deleteState, setDelete] = useState(false)
-    const [addMember, setAddMember] = useState(false)
-    const [batch, setBatch] = useState(false)
 
   return (
     <View style={tw`h-full`}>
@@ -52,16 +47,6 @@ export default function Member() {
         body={<DeleteMember setVisible={setDelete}/>}
         visible={deleteState}
     />
-
-    <ModalTemplate
-        body={<AddMember setVisible={setAddMember}/>}
-        visible={addMember}
-    /> 
-
-    <ModalTemplate
-        body={<BatchUpload setVisible={setBatch}/>}
-        visible={batch}
-    />   
 
         <View style={tw`w-full flex-row  mx-auto py-4`}>
             <View style={tw`w-6/12 pl-2 pr-1`}>
@@ -88,10 +73,6 @@ export default function Member() {
 
         <View>
             <Search/>
-        </View>
-        <View style={tw`flex-row justify-around`}>
-            <RoundedButton text='Add Member' pressed={()=>setAddMember(true)} />
-            <RoundedButton text=' Batch Upload' pressed={()=>setBatch(true)} />
         </View>
 
         <View>

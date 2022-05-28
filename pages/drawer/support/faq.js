@@ -4,22 +4,26 @@ import tw from 'tailwind-react-native-classnames'
 import Ionicon from 'react-native-vector-icons/Ionicons'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
-import DueCard from '../../components/card/dueCard'
-import TobBar from '../../components/helpers/topbar'
-import ModalTemplate from '../../components/modal/index'
-import Logout from '../../components/modal/Logout'
-import Search from '../../components/helpers/search'
-import { MemberCard } from '../../components/card/MemberCard'
-import IconButton from '../../components/button/IconButton'
-import EditMember from '../../components/modal/Member/editMember'
-import DeleteMember from '../../components/modal/Member/deleteMember'
-import RoundedButton from '../../components/button/RoundedButton'
-import AddMember from '../../components/modal/Member/addMember'
-import BatchUpload from '../../components/modal/Member/batchUpload'
+import DueCard from '../../../components/card/dueCard'
+// import TobBar from '../../components/helpers/topbar'
+import ModalTemplate from '../../../components/modal/index'
+// import Logout from '../../components/modal/Logout'
+import Search from '../../../components/helpers/search'
+import { MemberCard } from '../../../components/card/MemberCard'
+import IconButton from '../../../components/button/IconButton'
+import EditMember from '../../../components/modal/Member/editMember'
+import DeleteMember from '../../../components/modal/Member/deleteMember'
+import RoundedButton from '../../../components/button/RoundedButton'
+import AddMember from '../../../components/modal/Member/addMember'
+import BatchUpload from '../../../components/modal/Member/batchUpload'
+import { SupportCard } from '../../../components/card/support/SupportCard'
+import EditFAQ from '../../../components/modal/Support/editFAQ'
+import Delete from '../../../components/modal/delete'
+import AddFAQ from '../../../components/modal/Support/addFAQ'
 
 
 const data =[
-    {id:'1', name:'Chigozie Nwacukwu', department:'Accounting', Year:'2009'},
+    {id:'1', name:'To get Started', department:'Accounting', Year:'2009'},
     {id:'2',name:'Chigozie Nwacukwu', department:'Accounting', Year:'2009'},
     {id:'3',name:'Chigozie Nwacukwu', department:'Accounting', Year:'2009'},
     {id:'4',name:'Chigozie Nwacukwu', department:'Accounting', Year:'2009'},
@@ -28,12 +32,12 @@ const data =[
     {id:'7',name:'Chigozie Nwacukwu', department:'Accounting', Year:'2009'},
 ]
 
-export default function Member() {
+export default function FAQ() {
 
     const [edit, setEdit] = useState(false)
     const [deleteState, setDelete] = useState(false)
     const [addMember, setAddMember] = useState(false)
-    const [batch, setBatch] = useState(false)
+   
 
   return (
     <View style={tw`h-full`}>
@@ -44,54 +48,29 @@ export default function Member() {
     }
     
     <ModalTemplate
-        body={<EditMember setVisible={setEdit}/>}
+        body={<EditFAQ setVisible={setEdit}/>}
         visible={edit}
     />
 
     <ModalTemplate
-        body={<DeleteMember setVisible={setDelete}/>}
+        body={<Delete setVisible={setDelete} what='FAQ' />}
         visible={deleteState}
     />
 
     <ModalTemplate
-        body={<AddMember setVisible={setAddMember}/>}
+        body={<AddFAQ setVisible={setAddMember}/>}
         visible={addMember}
     /> 
 
-    <ModalTemplate
-        body={<BatchUpload setVisible={setBatch}/>}
-        visible={batch}
-    />   
 
-        <View style={tw`w-full flex-row  mx-auto py-4`}>
-            <View style={tw`w-6/12 pl-2 pr-1`}>
-                <DueCard 
-                    description='Total Active Members' 
-                    text={true}
-                    color='text-blue-700'
-                    amount='2,900'
-                    bg='bg-blue-100'
-                />
-            </View>
-
-            <View style={tw`w-6/12 pr-2`}>
-
-            <DueCard 
-                description='Total Non Active Members' 
-                text={true}
-                color='text-gray-200'
-                amount='2,900'
-                bg='bg-blue-800'
-            />
-            </View>
-        </View>
+        
 
         <View>
             <Search/>
         </View>
-        <View style={tw`flex-row justify-around`}>
-            <RoundedButton text='Add Member' pressed={()=>setAddMember(true)} />
-            <RoundedButton text=' Batch Upload' pressed={()=>setBatch(true)} />
+        <View style={tw` w-4/12 mx-5`}>
+            <RoundedButton text='Add FAQ' pressed={()=>setAddMember(true)} />
+            
         </View>
 
         <View>
@@ -101,9 +80,9 @@ export default function Member() {
                 keyExtractor={(item)=>item.id}
                 ListFooterComponent={<View style={tw`h-32`}/>}
                 renderItem={({item})=>(
-                    <MemberCard 
-                        name ={item.name} 
-                        dept={item.department}
+                    <SupportCard 
+                        title ={item.name} 
+                        body={item.department}
                         year={item.Year}
                         setVisible={setEdit}
                         button1={<IconButton bg='bg-gray-100' icon={  

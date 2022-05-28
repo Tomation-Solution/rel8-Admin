@@ -4,6 +4,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicon from 'react-native-vector-icons/Ionicons'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import Home from '../../pages/tabbed/Home';
+import News from '../../pages/drawer/news';
+import Dues from '../../pages/drawer/due';
 
 
 const Chat=()=>{
@@ -46,7 +48,7 @@ export default function TabScreen() {
       }}/>
 
       <Tab.Screen name='news' 
-        component={Chat} 
+        component={News} 
         options={{
         tabBarLabel: 'News',
         tabBarIcon: ({ color, size }) => (
@@ -54,8 +56,8 @@ export default function TabScreen() {
         ),
       }}/>
       
-      <Tab.Screen name='account' 
-        component={MyAccount} 
+      <Tab.Screen name='dues' 
+        component={Dues} 
         options={{
         tabBarLabel: 'Dues',
         tabBarIcon: ({ color, size }) => (
