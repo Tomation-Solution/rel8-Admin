@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { View, SafeAreaView, Text } from 'react-native'
 import React, {useState} from 'react'
 import { createStackNavigator } from '@react-navigation/stack';
 import tw from 'tailwind-react-native-classnames';
@@ -7,6 +7,8 @@ import Ionicon from 'react-native-vector-icons/Ionicons'
 import Member from '../member';
 import TobBar from '../../../components/helpers/topbar';
 import TabbedButton from '../../../components/button/TabbedButton';
+import Excos from '../Excos';
+import Committe from '../Committee';
 // import Member from '../members/member';
 
 
@@ -33,11 +35,11 @@ export default function MemberIndex({navigation}) {
     }
 
   return (
-    <View style={tw`h-full`}>
+    <SafeAreaView style={tw`h-full`}>
         <TobBar
             body={
                 <View style={tw`flex-row justify-between px-2 py-3 bg-gray-100`}>
-                    <Ionicon name='ios-arrow-back' size={20} />
+                    <Ionicon name='ios-arrow-back' size={20} onPress={()=>navigation.goBack()} />
                     <Text style={tw`font-bold text-base`}>Members Directory</Text>
                     <Ionicon name='md-notifications' size={20} />
 
@@ -54,9 +56,9 @@ export default function MemberIndex({navigation}) {
         
         <Stack.Navigator screenOptions={{headerShown:false}} >
             <Stack.Screen name='member' component={Member}/>
-            <Stack.Screen name='exco' component={Member}/>
-            <Stack.Screen name='committee' component={Member}/>
+            <Stack.Screen name='exco' component={Excos}/>
+            <Stack.Screen name='committee' component={Committe}/>
         </Stack.Navigator>
-     </View>
+     </SafeAreaView>
   )
 }
