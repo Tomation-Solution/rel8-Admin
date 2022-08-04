@@ -3,15 +3,16 @@ import { View, Text, Pressable } from 'react-native';
 import tw from 'tailwind-react-native-classnames';
 
 import RoundedButton from '../../button/RoundedButton';
+import ImageUpload from '../../input/imageUpload';
 import InputField from '../../input/TextField';
 
 
 export default function AddImage(props) {
 
     const [name, setName] = useState(null)
-    const [address, setAddress] = useState(null)
-    const [email, setEmail] = useState(null)
-    const [phone, setPhone] = useState(null)
+    const [document, setDocument] = useState(null)
+    const [link, setLink] = useState(null)
+    // const [phone, setPhone] = useState(null)
 
   return (
     <View style={tw`m-auto bg-white rounded-xl w-10/12`}>
@@ -21,10 +22,10 @@ export default function AddImage(props) {
         {/* <Text style={tw`px-5 text-center py-3 text-gray-700`}>Kindly confirm you wish to logout of the application</Text> */}
         
         <InputField label='Title' setText={setName} />
-        <InputField label='Content' setText={setAddress} />
-        {/* <InputField label='Date' setText={setPhone} />
-        <InputField label='Reader' setText={setEmail} />
-        <InputField label='Image' setText={setName} /> */}
+        <InputField label='Link url' setText={setLink} />
+        <View>
+            <ImageUpload label='upload Image' isImage document={document} setDocument={setDocument}/>
+        </View>
 
 
         <View style={tw`px-5 flex-row mb-4 justify-around `}>

@@ -4,30 +4,24 @@ import tw from 'tailwind-react-native-classnames'
 import Ionicon from 'react-native-vector-icons/Ionicons'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
-import DueCard from '../../../components/card/dueCard'
+import {MemberCard} from '../../../components/card/MemberCard'
+import Search from '../../../components/helpers/search'
 import TobBar from '../../../components/helpers/topbar'
 import ModalTemplate from '../../../components/modal/index'
-import Logout from '../../../components/modal/Logout'
-import Search from '../../../components/helpers/search'
-import { MemberCard } from '../../../components/card/MemberCard'
 import IconButton from '../../../components/button/IconButton'
-import EditMember from '../../../components/modal/Member/editMember'
-import DeleteMember from '../../../components/modal/Member/deleteMember'
-import Delete from '../../../components/modal/delete'
-
-const data =[
-    {id:'1', name:'Chigozie Nwacukwu', department:'Accounting', Year:'2009'},
-    {id:'2',name:'Chigozie Nwacukwu', department:'Accounting', Year:'2009'},
-    {id:'3',name:'Chigozie Nwacukwu', department:'Accounting', Year:'2009'},
-    {id:'4',name:'Chigozie Nwacukwu', department:'Accounting', Year:'2009'},
-    {id:'5',name:'Chigozie Nwacukwu', department:'Accounting', Year:'2009'},
-    {id:'6',name:'Chigozie Nwacukwu', department:'Accounting', Year:'2009'},
-    {id:'7',name:'Chigozie Nwacukwu', department:'Accounting', Year:'2009'},
-]
+import Delete from '../../../components/modal/Others/delete';
 
 export default function Archive({navigation}) {
-
-    const [deleteState, setDelete] = useState(false)
+    
+     const [deleteState, setDelete] = useState(false)
+     const data =[
+        {id:1, 'name':'Chigozie Nwacukwu', 'department':'Accounting', Year:'2009'},
+        {id:2, 'name':'Chigozie Nwacukwu', 'department':'Accounting', Year:'2009'},
+        {id:3, 'name':'Chigozie Nwacukwu', 'department':'Accounting', Year:'2009'},
+        {id:4, 'name':'Chigozie Nwacukwu', 'department':'Accounting', Year:'2009'},
+        {id:5, 'name':'Chigozie Nwacukwu', 'department':'Accounting', Year:'2009'},
+        {id:6, 'name':'Chigozie Nwacukwu', 'department':'Accounting', Year:'2009'},
+     ]
     
   return (
     <SafeAreaView style={tw`h-full`}>
@@ -47,14 +41,10 @@ export default function Archive({navigation}) {
             </View>
         }
         />
-
-    <ModalTemplate
+   <ModalTemplate
         body={<Delete setVisible={setDelete} what='User'/>}
         visible={deleteState}
     />
-
-  
-        
 
         <View>
             <Search/>
@@ -63,24 +53,21 @@ export default function Archive({navigation}) {
         <View>
             <FlatList
                 data={data}
-                // key
                 keyExtractor={(item)=>item.id}
                 ListFooterComponent={<View style={tw`h-32`}/>}
                 renderItem={({item})=>(
                     <MemberCard 
-                        name ={item.name} 
-                        dept={item.department}
+                       name ={item.name} 
+                      dept={item.department}
                         year={item.Year}
-                        // setVisible={setEdit}
-                        
-                        button2={<IconButton  bg='bg-gray-50' icon={  
+                        button1={<IconButton  bg='bg-gray-50' icon={  
                         <Ionicon onPress={()=>setDelete(true)} style={tw`my-auto px-1 text-base  text-red-800`}  name='trash'/>}/>}
+                        
                         />
                 )
                 }
             />
         </View>
-      {/* <Text>Ms</Text> */}
     </SafeAreaView>
   )
 }

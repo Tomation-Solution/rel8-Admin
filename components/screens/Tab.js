@@ -6,6 +6,7 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import Home from '../../pages/tabbed/Home';
 import News from '../../pages/drawer/news';
 import Dues from '../../pages/drawer/due';
+import EventIndex from '../../pages/drawer/events';
 
 
 const Chat=()=>{
@@ -65,8 +66,8 @@ export default function TabScreen() {
         ),
       }}/>
 
-      <Tab.Screen name='members' 
-        component={Members} 
+      <Tab.Screen name='events' 
+        component={EventIndex} 
         options={{
         tabBarLabel: 'Events',
         tabBarIcon: ({ color, size }) => (

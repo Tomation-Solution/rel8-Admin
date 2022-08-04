@@ -6,8 +6,8 @@ import RoundedButton from "../../button/RoundedButton"
 export const GalleryCard =(props)=>{
     return(
         <View style={tw`bg-white  flex-row rounded-lg my-1 mx-2  p-2`}>
-            <View >
-            <Image style={tw`h-20 w-20 rounded-lg`} source={require('../../../images/onboarding/guy.png')} />
+            <View style={tw`bg-gray-100`}>
+            <Image style={tw`h-20 w-20 rounded-lg`} source={{uri:props.image}} />
 
             </View>
             <View style={tw`w-9/12 mx-3`}>
@@ -18,12 +18,12 @@ export const GalleryCard =(props)=>{
             
                 <View style={tw`flex-row justify-between`}>
                     <Text style={tw`my-auto`}>{props.body}</Text>
-                    {/* <Text style={tw`my-auto`}>{props.year}</Text> */}
+                    
                     <View style={tw`w-20 flex-row justify-between`}>
                         {props.button1}
 
                         {props.button2}
-                        {/* <RoundedButton text='View' pressed={()=>props.navigation.navigate('view-member')}/> */}
+
                     </View> 
                     
                 </View>

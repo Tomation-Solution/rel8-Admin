@@ -14,7 +14,7 @@ import IconButton from '../../../components/button/IconButton'
 import EditMember from '../../../components/modal/Member/editMember'
 import DeleteMember from '../../../components/modal/Member/deleteMember'
 import { SupportCard } from '../../../components/card/support/SupportCard'
-import Delete from '../../../components/modal/delete'
+import Delete from '../../../components/modal/Others/delete'
 
 
 const data =[

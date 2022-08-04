@@ -1,0 +1,25 @@
+import api from '../api'
+import localStorage from 'react-native-sync-localstorage'
+
+//Gets Dashboard Stats for a Admin
+export const GetStats = async(callback)=>{
+    try {
+        const response = await api.get(`tenant/${localStorage.getItem('org_name')}/tenant/user/AdminRelatedViews/dashboard_info/`)
+    //    con
+        if (response.status==200) {
+            // console.log(response)
+            callback(response);
+        } else {
+            console.log(response.status)
+        //   console.log(response.data.statusText)
+          alert(response.status)
+        //   callback(response)
+        }
+    } catch (error) {
+        console.error(error)
+        // console.log(error.response.detail)
+        alert(error)
+        // setLoading(false)
+
+    }
+}

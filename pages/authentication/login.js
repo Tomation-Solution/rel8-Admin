@@ -1,9 +1,10 @@
-import { View, SafeAreaView,Text, Image, TextInput,TouchableOpacity } from 'react-native'
+import { View, SafeAreaView,Text, Image, ActivityIndicator, TextInput,TouchableOpacity } from 'react-native'
 import {useState} from 'react'
 import tw from 'tailwind-react-native-classnames'
 import RoundedButton from '../../components/button/RoundedButton'
 import ModalTemplate from '../../components/button/RoundedButton'
 import Ionicon from 'react-native-vector-icons/Ionicons'
+import { LoginUser } from '../../connection/authentication/auth.actions'
 
 
 const OwingWidget=()=>{
@@ -41,6 +42,23 @@ const OwingWidget=()=>{
 }
 
 export default function Login ({navigation}) {
+  // export const LoginUser = async(data, org,callback, setLoading)=>{
+
+  const [data, setData] = useState({username:'', password:'', org_name:''})
+  const [loading, setLoading] =useState(false)
+  console.log(data)
+  // const login =()=>{
+
+  // }
+  const handleLogin=()=>{
+    setLoading(true)
+    LoginUser({email:data.username, password:data.password}, data.org_name, callback, setLoading)
+  }
+
+  const callback =(res)=>{
+    console.log(res)
+    navigation.navigate('dashboard')
+  }
   return (
     <SafeAreaView style={tw`h-full `}>
       <View style={tw`my-auto`}>
@@ -55,26 +73,42 @@ export default function Login ({navigation}) {
           
           <View>
               <View style={tw`my-3 border-b`}>
+                <Text>Organization Name</Text>
+                <TextInput
+                placeholder='Organization Name'
+                style={tw`py-2`}
+                onChangeText={(text)=>setData({...data,'org_name':text})}
+                />
+              </View>
+             
+              <View style={tw`my-3 border-b`}>
                 <Text>Username</Text>
                 <TextInput
                 placeholder='username'
                 style={tw`py-2`}
+                onChangeText={(text)=>setData({...data,'username':text})}
                 />
               </View>
               <View style={tw`my-3 border-b`}>
                 <Text>Password</Text>
                 <TextInput
-                placeholder='Pasword'
+                placeholder='Password'
                 style={tw`py-2`}
                 secureTextEntry={true}
+                onChangeText={(text)=>setData({...data,'password':text})}
+
                 />
               </View>
           </View>
           <View style={tw`my-3`}>
-            <RoundedButton 
+            { loading 
+            ?
+            <ActivityIndicator color='purple'/> :
+              <RoundedButton 
               text='Login'
-              pressed={()=>navigation.navigate('dashboard')}
-            />
+              // pressed={()=>navigation.navigate('dashboard')}
+              pressed={()=>handleLogin()}
+            />}
           </View>
           {/* <TouchableOpacity onPress={()=>navigation.navigate('forgotPassword')}> 
             <Text style={tw`text-xs`}>Forgot Password?</Text>

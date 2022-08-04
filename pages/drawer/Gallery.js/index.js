@@ -1,5 +1,5 @@
 import { View,SafeAreaView, FlatList, Platform, StatusBar,Text } from 'react-native'
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import tw from 'tailwind-react-native-classnames'
 import Ionicon from 'react-native-vector-icons/Ionicons'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
@@ -9,14 +9,11 @@ import ModalTemplate from '../../../components/modal/index'
 import Search from '../../../components/helpers/search'
 import IconButton from '../../../components/button/IconButton'
 import RoundedButton from '../../../components/button/RoundedButton'
-import { NewsCard } from '../../../components/card/news/NewsCard'
-import EditNews from '../../../components/modal/News/editNews'
-import DeleteNews from '../../../components/modal/News/deleteNews'
-import AddNews from '../../../components/modal/News/addNews'
 import { GalleryCard } from '../../../components/card/gallery/GalleryCard'
 import AddImage from '../../../components/modal/Gallery/addImage'
 import EditImage from '../../../components/modal/Gallery/editImage'
 import DeleteImage from '../../../components/modal/Gallery/deleteImage'
+import { GetGallery } from '../../../connection/gallery'
 
 
 const data =[
@@ -34,7 +31,14 @@ export default function Gallery({navigation}) {
     const [edit, setEdit] = useState(false)
     const [deleteState, setDelete] = useState(false)
     const [addNews, setAddNews] = useState(false)
-    const [batch, setBatch] = useState(false)
+    const [galleryData, setGalleryData] = useState(null)
+
+    useEffect(()=>{
+        GetGallery(callback)
+    })
+    const callback=(res)=>{
+        setGalleryData(res.data)
+    }
 
   return (
     <SafeAreaView style={tw`h-full`}>
@@ -83,7 +87,7 @@ export default function Gallery({navigation}) {
 
         <View>
             <FlatList
-                data={data}
+                data={galleryData}
                 // key
                 keyExtractor={(item)=>item.id}
                 ListFooterComponent={<View style={tw`h-32`}/>}
@@ -92,6 +96,7 @@ export default function Gallery({navigation}) {
                         name ={item.name} 
                         body={item.body}
                         time={item.time}
+                        image={item.photo_file}
                         setVisible={setEdit}
                         button1={<IconButton bg='bg-gray-100' icon={  
                         <MaterialIcon onPress={()=>setEdit(true)} style={tw`my-auto px-1 text-base text-blue-500`}  name='mode-edit'/>

@@ -1,5 +1,5 @@
 import { View,SafeAreaView, FlatList, Platform, StatusBar,Text } from 'react-native'
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import tw from 'tailwind-react-native-classnames'
 import Ionicon from 'react-native-vector-icons/Ionicons'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
@@ -7,7 +7,6 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import DueCard from '../../components/card/dueCard'
 import TobBar from '../../components/helpers/topbar'
 import ModalTemplate from '../../components/modal/index'
-import Logout from '../../components/modal/Logout'
 import Search from '../../components/helpers/search'
 import { MemberCard } from '../../components/card/MemberCard'
 import IconButton from '../../components/button/IconButton'
@@ -16,6 +15,7 @@ import DeleteMember from '../../components/modal/Member/deleteMember'
 import RoundedButton from '../../components/button/RoundedButton'
 import AddMember from '../../components/modal/Member/addMember'
 import BatchUpload from '../../components/modal/Member/batchUpload'
+import { GetMembers } from '../../connection/members'
 
 
 const data =[
@@ -29,11 +29,21 @@ const data =[
 ]
 
 export default function Member() {
-
+    const [memberList, setMemberList] = useState(null)
     const [edit, setEdit] = useState(false)
     const [deleteState, setDelete] = useState(false)
     const [addMember, setAddMember] = useState(false)
     const [batch, setBatch] = useState(false)
+
+
+    useEffect(()=>{
+        GetMembers(callback)
+    })
+
+    const callback =(res)=>{
+        console.log(res.data.data[0].members.map(e=>e))
+        setMemberList(res.data.data[0].members.map(e=>e))
+    }
 
   return (
     <View style={tw`h-full`}>
@@ -96,14 +106,14 @@ export default function Member() {
 
         <View>
             <FlatList
-                data={data}
+                data={memberList}
                 // key
                 keyExtractor={(item)=>item.id}
                 ListFooterComponent={<View style={tw`h-32`}/>}
                 renderItem={({item})=>(
                     <MemberCard 
-                        name ={item.name} 
-                        dept={item.department}
+                        name ={item.memeber_info.map(f=>{if(f.name=='First Name' || f.name=='Second Name' ) {return f.value + ' '}})}
+                        dept={item.user__email}
                         year={item.Year}
                         setVisible={setEdit}
                         button1={<IconButton bg='bg-gray-100' icon={  

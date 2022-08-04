@@ -18,6 +18,12 @@ import Minutes from '../../pages/drawer/minute';
 import Dues from '../../pages/drawer/due';
 import SupportIndex from '../../pages/drawer/support';
 import Settings from '../../pages/drawer/settings';
+import Criteria from '../../pages/drawer/settings/criteria';
+import OrgInfo from '../../pages/drawer/settings/orgInfo';
+import PaymentPlans from '../../pages/drawer/settings/paymentPlan';
+import EventIndex from '../../pages/drawer/events';
+import Election from '../../pages/drawer/election';
+import ViewElection from '../../pages/drawer/election/viewElection';
 
 
 const StackScreen =createStackNavigator()
@@ -31,15 +37,21 @@ export default function Stack() {
           <StackScreen.Screen  name='register' component={Register}/>
           <StackScreen.Screen  name='accountCreated' component={AccountCreated}/>
           <StackScreen.Screen name='members' component={MemberIndex}/>
+          <StackScreen.Screen name='events' component={EventIndex}/>
           <StackScreen.Screen name='new' component={News}/>
           <StackScreen.Screen name='publications' component={Publications}/>
           <StackScreen.Screen name='dashboard' component={Drawer}/>
           <StackScreen.Screen name='gallery' component={Gallery}/>
+          <StackScreen.Screen name='elections' component={Election}/>
+          <StackScreen.Screen name='viewElection' component={ViewElection}/>
           <StackScreen.Screen name='archive' component={Archive}/>
           <StackScreen.Screen name='minute' component={Minutes}/>
           <StackScreen.Screen name='dues' component={Dues}/>
           <StackScreen.Screen name='supports' component={SupportIndex}/>
           <StackScreen.Screen name='settings' component={Settings}/>
+          <StackScreen.Screen name='criteria' component={Criteria}/>
+          <StackScreen.Screen name='orgInfo' component={OrgInfo}/>
+          <StackScreen.Screen name='plans' component={PaymentPlans}/>
               {/* {()=>(TabScreen)
 
               }

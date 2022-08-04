@@ -1,5 +1,5 @@
 import { View,SafeAreaView, FlatList, Platform, StatusBar,Text } from 'react-native'
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import tw from 'tailwind-react-native-classnames'
 import Ionicon from 'react-native-vector-icons/Ionicons'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
@@ -7,7 +7,6 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import DueCard from '../../../components/card/dueCard'
 import TobBar from '../../../components/helpers/topbar'
 import ModalTemplate from '../../../components/modal/index'
-import Logout from '../../../components/modal/Logout'
 import Search from '../../../components/helpers/search'
 import { MemberCard } from '../../../components/card/MemberCard'
 import IconButton from '../../../components/button/IconButton'
@@ -20,6 +19,10 @@ import { NewsCard } from '../../../components/card/news/NewsCard'
 import EditNews from '../../../components/modal/News/editNews'
 import DeleteNews from '../../../components/modal/News/deleteNews'
 import AddNews from '../../../components/modal/News/addNews'
+import { GetPublications } from '../../../connection/publications'
+import AddPublication from '../../../components/modal/Publication/addPublication'
+import DeletePublicaion from '../../../components/modal/Publication/deletePublicaion'
+import EditPublication from '../../../components/modal/Publication/editPublication'
 
 
 const data =[
@@ -35,9 +38,19 @@ const data =[
 export default function Publications({navigation}) {
 
     const [edit, setEdit] = useState(false)
+    const [publications, setPublications] = useState(null)
     const [deleteState, setDelete] = useState(false)
     const [addNews, setAddNews] = useState(false)
     const [batch, setBatch] = useState(false)
+    // const [addNews, setAddNews] = useState(false)
+
+    useEffect (()=>{
+        GetPublications(callback)
+    })
+    const callback =(res)=>{
+        setPublications(res.data)
+        // console.log(res.data)
+    }
 
   return (
     <SafeAreaView style={tw`h-full`}>
@@ -58,17 +71,17 @@ export default function Publications({navigation}) {
     />
     
     <ModalTemplate
-        body={<EditNews setVisible={setEdit}/>}
+        body={<EditPublication setVisible={setEdit}/>}
         visible={edit}
     />
 
     <ModalTemplate
-        body={<DeleteNews setVisible={setDelete}/>}
+        body={<DeletePublicaion setVisible={setDelete}/>}
         visible={deleteState}
     />
 
     <ModalTemplate
-        body={<AddNews setVisible={setAddNews}/>}
+        body={<AddPublication setVisible={setAddNews}/>}
         visible={addNews}
     /> 
 
@@ -87,7 +100,7 @@ export default function Publications({navigation}) {
 
         <View>
             <FlatList
-                data={data}
+                data={publications}
                 // key
                 keyExtractor={(item)=>item.id}
                 ListFooterComponent={<View style={tw`h-32`}/>}
